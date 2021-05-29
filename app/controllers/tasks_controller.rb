@@ -15,7 +15,7 @@ class TasksController < ApplicationController
     else
       render 'new'
     end
-  end  
+  end
 
     def edit
       @task = Task.find(params[:id])
@@ -35,7 +35,14 @@ class TasksController < ApplicationController
       @task.destroy
       redirect_to root_path
     end
- 
+
+    def toggle
+      head :no_content
+      @task = Task.find(params[:id])
+      @task.done = !@task.done
+      @task.save
+    end
+
 
   private
   def task_params
